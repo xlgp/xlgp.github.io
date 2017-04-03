@@ -4,6 +4,7 @@
         init: function () {
             $('.js-toggle-search').on('click', function () {
                 $('.js-search').toggleClass('is-visible');
+                $('.js-search input')[0].focus();
             });
 
             $('.js-next a').on('click', function (e) {
