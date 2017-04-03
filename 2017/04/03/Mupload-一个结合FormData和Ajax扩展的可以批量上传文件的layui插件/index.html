@@ -112,7 +112,7 @@
               url:&#39;上传路径&#39;,
               //必须，传递table的id,请不要传class
               container:&#39;容器id&#39;,
-              //默认&quot;file&quot;，设置table容器中&lt;input type=&quot;file&quot;/&gt;的name值，用于服务器获取文件名
+              //默认&quot;file&quot;，用于服务器获取文件名
               file_name:&#39;file&#39;,
               //回调函数
               complete:function(res){
@@ -142,13 +142,33 @@
 </code></pre><blockquote>
 <p>每一返回值一定返回一个类型为number的code,且code = 0 表示上传成功，code != 0 表示失败</p>
 </blockquote>
-<h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>这是一个在服务器上的php脚本的例子，结合<a href="https://codeigniter.org.cn/" target="_blank" rel="external">codeigniter</a>的文件上传类。</p>
+<pre><code>public function mupload(){
+    $config[&#39;upload_path&#39;]      = &#39;./uploads/&#39;;
+    $config[&#39;allowed_types&#39;]    = &#39;png|jpg|pdf&#39;;
+    $this-&gt;load-&gt;library(&#39;upload&#39;, $config);
+
+    $data[&#39;code&#39;]   = 0;
+    $data[&#39;msg&#39;]    = &#39;上传成功&#39;;
+    //file即是客户端传回的file_name值
+    if ($this-&gt;upload-&gt;do_upload(&#39;file&#39;)) {
+        $data[&#39;client_name&#39;] = $this-&gt;upload-&gt;data(&#39;client_name&#39;);
+        $data[&#39;file_name&#39;] = $this-&gt;upload-&gt;data(&#39;file_name&#39;);
+        echo  json_encode($data);
+    }else{
+        $data[&#39;code&#39;]   = 1;
+        $data[&#39;error&#39;]=$this-&gt;upload-&gt;display_errors();
+        echo json_encode($data);
+    }
+
+}
+</code></pre><h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3>
 	</div>
 	<div class="meta split">
 		
 			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
 		
-		<time class="post-date" datetime="2017-04-03T05:11:54.552Z" itemprop="datePublished">2017-04-03</time>
+		<time class="post-date" datetime="2017-04-03T05:22:57.541Z" itemprop="datePublished">2017-04-03</time>
 	</div>
 </article>
 
