@@ -783,7 +783,7 @@ article .post-body ol {
 article .post-body ul li,
 article .post-body ol li {
   font-size: 15px;
-  padding: 10px 0 10px 25px;
+  padding: 5px 0 5px 25px;
   list-style-type: none;
 }
 article .post-body ul li:before,
