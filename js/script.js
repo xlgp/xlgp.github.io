@@ -3,7 +3,6 @@
     var App = App || {
         init: function () {
             $('.js-toggle-search').on('click', function () {
-                $('.js-search input')[0].focus();
                 $('.js-search').toggleClass('is-visible');
             });
 
