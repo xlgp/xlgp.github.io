@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Mupload-一个结合FormData和Ajax扩展的可以批量上传文件的layui插件 | 心灵的孤僻</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow.min.css">
+
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="心灵的孤僻">
+	<img src="/favicon.png" alt="心灵的孤僻"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="Enter Key..." type="search">
+		</div>
+	</div>
+</form>
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/309750261" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+			<a href="/" title="心灵的孤僻"><img src="https://avatars2.githubusercontent.com/u/26807499?v=3&amp;u=dd3f5e9c7e47bbd63092da5d77eb1ed0176d9e20&amp;s=400" alt="心灵的孤僻"></a>
+		  	<div class="text">一个碌碌无为之少年</div>
+		  	<div class="text">一段平平无奇之岁月</div>
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      Mupload-一个结合FormData和Ajax扩展的可以批量上传文件的layui插件
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Mupload是可以批量上传文件的插件，它结合FormData和Ajax,在layui基础上进行扩展的。</p>
+<h3 id="ScreenShots"><a href="#ScreenShots" class="headerlink" title="ScreenShots"></a>ScreenShots</h3><ol>
+<li>初始化状态<br><img src="https://github.com/xlgp/share/raw/master/image/Screenshot_20170329_142936.png" alt="初始状态"></li>
+<li>添加文件状态<br><img src="https://github.com/xlgp/share/raw/master/image/Screenshot_20170329_142306.png" alt="添加文件状态"></li>
+<li>上传结束状态<br><img src="https://github.com/xlgp/share/raw/master/image/Screenshot_20170329_142443.png" alt="上传结束状态"></li>
+</ol>
+<h3 id="页面初始化"><a href="#页面初始化" class="headerlink" title="页面初始化"></a>页面初始化</h3><pre><code>//在页面上加入table元素
+&lt;table id=&quot;container&quot; class=&quot;layui-table&quot;&gt;&lt;/table&gt;
+
+//或者可以设置列的width;
+&lt;table id=&quot;container&quot; class=&quot;layui-table&quot;&gt;
+    &lt;colgroup&gt;
+        &lt;col width=&quot;47%&quot;&gt;
+        &lt;col width=&quot;37%&quot;&gt;
+        &lt;col width=&quot;8%&quot;&gt;
+        &lt;col width=&quot;8%&quot;&gt;
+        &lt;col&gt;
+    &lt;/colgroup&gt;
+&lt;/table&gt;
+</code></pre><h3 id="模块引入方式"><a href="#模块引入方式" class="headerlink" title="模块引入方式"></a>模块引入方式</h3><p>推荐使用layui官网推荐的<a href="https://www.layui.com/doc/#recommend" target="_blank" rel="external">规范化的用法</a>的方式引入mupload模块，<br>尽量不要用<code>&lt;script&gt;&lt;/script&gt;</code>元素引入mupload.js，这种方式会使mupload模块无法被正确加载</p>
+<pre><code>layui.config({
+    base:&#39;/path/&#39;, //mupload模块所在的目录
+})use([&#39;mupload&#39;], function(){
+            layui.mupload({
+              //必须，服务器路径
+              url:&#39;上传路径&#39;,
+              //必须，传递table的id,请不要传class
+              container:&#39;容器id&#39;,
+              //默认&quot;file&quot;，用于服务器获取文件名
+              file_name:&#39;file&#39;,
+              //回调函数
+              complete:function(res){
+                  //res:返回所有文件的上传结果
+              }
+    });
+  })
+</code></pre><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><ol>
+<li>添加文件：在没有上传文件之前可以多次添加文件</li>
+<li>删除文件：在当前文件还没有上传之前可以将其删除</li>
+</ol>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>回调函数complete的参数是一个数组，包含每一个上传文件的返回值，且每一个返回值为json，你或许可以返回如下的信息：</p>
+<pre><code>[
+    {
+        code:0,
+        msg:&#39;上传成功&#39;,
+        obj:{
+            &#39;filename&#39;:&#39;filename1.jpg&#39;,
+        }
+    },
+    {
+        code:1,
+        msg:&#39;上传失败&#39;,
+        obj:{}
+    },
+]
+</code></pre><blockquote>
+<p>每一返回值一定返回一个类型为number的code,且code = 0 表示上传成功，code != 0 表示失败</p>
+</blockquote>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>这是一个在服务器上的php脚本的例子，结合<a href="https://codeigniter.org.cn/" target="_blank" rel="external">codeigniter</a>的文件上传类。</p>
+<pre><code>public function mupload(){
+    $config[&#39;upload_path&#39;]      = &#39;./uploads/&#39;;
+    $config[&#39;allowed_types&#39;]    = &#39;png|jpg|pdf&#39;;
+    $this-&gt;load-&gt;library(&#39;upload&#39;, $config);
+    $data[&#39;code&#39;]   = 0;
+    $data[&#39;msg&#39;]    = &#39;上传成功&#39;;
+    //file即是客户端传回的file_name值
+    if ($this-&gt;upload-&gt;do_upload(&#39;file&#39;)) {
+        $data[&#39;client_name&#39;] = $this-&gt;upload-&gt;data(&#39;client_name&#39;);
+        $data[&#39;file_name&#39;] = $this-&gt;upload-&gt;data(&#39;file_name&#39;);
+        echo  json_encode($data);
+    }else{
+        $data[&#39;code&#39;]   = 1;
+        $data[&#39;error&#39;]=$this-&gt;upload-&gt;display_errors();
+        echo json_encode($data);
+    }
+}
+</code></pre><p><a href="https://github.com/xlgp/share/tree/master/lib/js" target="_blank" rel="external">下载mupload模块</a></p>
+<h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3>
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-04-04T06:15:00.000Z" itemprop="datePublished">2017-04-04</time>
+	</div>
+</article>
+
+<!--评论-->
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://avatars2.githubusercontent.com/u/26807499?v=3&amp;u=dd3f5e9c7e47bbd63092da5d77eb1ed0176d9e20&amp;s=400' alt='文文同学'>
+					<div class="media__body">
+						<h4>心灵的孤僻</h4>
+						<p class='site-description'>一个碌碌无为之少年，一段平平无奇之岁月</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/309750261/" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/xlgp" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
