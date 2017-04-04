@@ -123,7 +123,7 @@
 </code></pre><h3 id="模块引入方式"><a href="#模块引入方式" class="headerlink" title="模块引入方式"></a>模块引入方式</h3><p>推荐使用layui官网推荐的<a href="https://www.layui.com/doc/#recommend" target="_blank" rel="external">规范化的用法</a>的方式引入mupload模块，<br>尽量不要用<code>&lt;script&gt;&lt;/script&gt;</code>元素引入mupload.js，这种方式会使mupload模块无法被正确加载</p>
 <pre><code>layui.config({
     base:&#39;/path/&#39;, //mupload模块所在的目录
-})use([&#39;mupload&#39;], function(){
+}).use([&#39;mupload&#39;], function(){
             layui.mupload({
               //必须，服务器路径
               url:&#39;上传路径&#39;,
