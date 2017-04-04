@@ -88,7 +88,7 @@
 
         var bannerNode = $('.top-image');
         if(bannerNode.data('enable')){
-            var url = '/banner/'+parseInt((Math.random() * 2) + 1)+'.jpg';
+            var url = '/banner/'+parseInt((Math.random() * 3) + 1)+'.jpg';
             // var url2 = 'http://img.infinitynewtab.com/wallpaper/'+Math.floor((Math.random()*3000)+1)+'.jpg';
             bannerNode.attr('style','background-image:url('+url+')');
         }
