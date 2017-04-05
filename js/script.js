@@ -85,7 +85,6 @@
                 $('.author-info').toggle();
             });
         }
-
         var bannerNode = $('.top-image');
         if(bannerNode.data('enable')){
             var url = '/banner/'+parseInt((Math.random() * 3) + 1)+'.jpg';
