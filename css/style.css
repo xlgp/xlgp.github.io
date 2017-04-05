@@ -221,6 +221,15 @@ header.scrolled #nav-toggle {
   padding-bottom: 550px;
   background: center center/cover no-repeat;
 }
+.m-header .parttcles {
+  background-color: #000;
+  height: 550px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
 .m-header #wave-canvas {
   position: absolute;
   bottom: -1px;
