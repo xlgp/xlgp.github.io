@@ -217,7 +217,7 @@
 					$(window).scrollTop() < 100 ? $('.top-btn').fadeOut():$('.top-btn').fadeIn();
 				});
 				$('.top-btn').on('click', function(){
-					$(window).scrollTop(0);
+					$('html, body').animate({scrollTop:0}, 500, 'swing');
 				});
 		});
 	</script>
