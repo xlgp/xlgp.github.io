@@ -258,7 +258,7 @@
 		<span>Powered by <a href="http://hexo.io">Hexo</a></span>
 	</div>
 </footer>
-<a href="javascript:;" class="top"></a>
+<a href="javascript:;" class="top-btn"></a>
 
 	<script src="/js/lib.js"></script>
 	<script src="/js/google-code-prettify/prettify.js"></script>
@@ -278,9 +278,9 @@
    			prettyPrint();
 
 				$(window).scroll(function(){
-					$(window).scrollTop() > 100 ? $('.top').fadeOut():$('.top').fadeIn();
+					$(window).scrollTop() > 100 ? $('.top-btn').fadeOut():$('.top-btn').fadeIn();
 				});
-				$('.top').on('click', function(){
+				$('.top-btn').on('click', function(){
 					$(window).scrollTop(0);
 				});
 		});
