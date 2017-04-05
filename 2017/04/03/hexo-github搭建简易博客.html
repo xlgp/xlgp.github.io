@@ -178,7 +178,6 @@
 				        		</a>
 				        	</li>
 						
-						<li><a href="javascript:;"><i class="iconfont icon-top"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -195,6 +194,7 @@
 		<span>Powered by <a href="http://hexo.io">Hexo</a></span>
 	</div>
 </footer>
+<a href="javascript:;" class="top"></a>
 
 	<script src="/js/lib.js"></script>
 	<script src="/js/google-code-prettify/prettify.js"></script>
@@ -210,8 +210,15 @@
 	<script type='text/javascript'>
 		//代码高亮
 		$(document).ready(function(){
-	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+	 			$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
    			prettyPrint();
+
+				$(window).scroll(function(){
+					$(window).scrollTop() > 100 ? $('.top').fadeOut():$('.top').fadeIn();
+				});
+				$('.top').on('click', function(){
+					$(window).scrollTop(0);
+				});
 		});
 	</script>
 	</body>

@@ -16,9 +16,6 @@
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
 }
-.icon-top:before {
-  content: "\e604";
-}
 .icon-twitter:before {
   content: "\e600";
 }
@@ -131,6 +128,30 @@ ins {
   border-radius: 20px;
   font-size: 12px !important;
   color: #bababa !important;
+}
+.top-btn {
+  display: none;
+  width: 35px;
+  height: 35px;
+  background: rgba(219,219,219,0.28);
+  border: 1px solid #249cf3;
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+}
+.top-btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 40%;
+  border: 1px solid #249cf3;
+  margin-left: 30%;
+  transform: rotate(45deg);
+  margin-top: 45%;
+  border-bottom: none;
+  border-right: none;
 }
 @media screen and (max-width: 719px) {
   .p-header .p-image {
