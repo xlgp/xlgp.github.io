@@ -246,6 +246,7 @@ header.scrolled #nav-toggle {
   background: center center/cover no-repeat;
 }
 .m-header .fixed-banner {
+  overflow: hidden;
   background-color: #000;
   height: 550px;
   position: absolute;
