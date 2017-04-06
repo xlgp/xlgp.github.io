@@ -102,7 +102,7 @@
       	  };
       	  var pattern = Trianglify(options)
       	  // svg
-      	  $('#trianglify')(pattern.svg());
+      	  $('#trianglify').append(pattern.svg());
 
         var bannerNode = $('.top-image');
         if(bannerNode.data('enable')){
