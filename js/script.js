@@ -97,7 +97,7 @@
       	    color_function: false,
       	    stroke_width: 1.51,
       	    height: 550,
-      	    width: 100%,
+      	    width: window,innerWidth,
       	    seed: null
       	  };
       	  var pattern = Trianglify(options)
