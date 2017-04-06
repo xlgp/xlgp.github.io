@@ -245,7 +245,7 @@ header.scrolled #nav-toggle {
   padding-bottom: 550px;
   background: center center/cover no-repeat;
 }
-.m-header .parttcles {
+.m-header .fixed-banner {
   background-color: #000;
   height: 550px;
   position: absolute;
