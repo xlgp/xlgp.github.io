@@ -131,6 +131,7 @@ ins {
 }
 .top-btn {
   display: none;
+  color: #249cf3;
   width: 35px;
   height: 35px;
   background: rgba(219,219,219,0.28);
