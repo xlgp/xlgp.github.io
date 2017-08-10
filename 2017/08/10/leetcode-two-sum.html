@@ -103,15 +103,61 @@
   
 
 	<div class='post-body mb'>
-		<p>#问题</p>
-<p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
-<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+		<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.<br>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
 <pre><code>Example:
 Given nums = [2, 7, 11, 15], target = 9,
-
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
-</code></pre>
+</code></pre><h3 id="原文大意"><a href="#原文大意" class="headerlink" title="原文大意"></a>原文大意</h3><p>给定一个整数数组和一个目标数target,返回数组中两个相加等于target的元素的下标;假设给定的数据中恰巧只有一个解,并且同一个元素不可使用两次.</p>
+<p>例如:<br>给定一个数组nums = [2, 7, 11, 15],target = 9,<br>因为 2+7 = 9,而2, 7在数组中的下标分别为0,1,所以返回[0,1].</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><h4 id="1-暴力求解"><a href="#1-暴力求解" class="headerlink" title="1. 暴力求解"></a>1. 暴力求解</h4><p>看到这道题,就想到用两个for循环遍历两遍,判断两个值相加是否等于target,C++代码如下:</p>
+<pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+      std::vector&lt;int&gt; r;
+        int len = nums.size();
+        //遍历一次数组
+        for (int i = 0; i &lt; len; ++i)
+        {
+          bool f = false;
+          //再遍历一次数组,让当前值与后面的值全都运算一遍
+          for (int j = i+1; j &lt; len; ++j)
+          {
+            if(nums[i] + nums[j] == target){
+              r.push_back(i);
+              r.push_back(j);
+              f = true;
+              break;
+            }
+          }
+          if (f)
+          {
+            break;
+          }
+        }
+        return r;
+</code></pre><p>由于遍历了两遍,时间复杂度为O(n^2),同时此段代码提交到<a href="https://leetcode.com/submissions/detail/113166176/" target="_blank" rel="external">leetcode</a>,其runtime为119ms,这个时间已经很长了.</p>
+<h4 id="2-哈希表"><a href="#2-哈希表" class="headerlink" title="2. 哈希表"></a>2. 哈希表</h4><p>减少运算时间,寻找优化方法,使用哈希表求解,哈希表查找速度非常快,时间复杂度为O(1),把当前元素的值作为key,其下标作为value,要求两个值之和等于target,即相当于在数组中查找target与当前元素的值之差,于是整个运算只需要循环一遍,其时间复杂度为O(n),C++代码如下:</p>
+<pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {
+      int len = nums.size();
+      std::vector&lt;int&gt; r;
+      std::unordered_map&lt;int, int&gt; hash;
+
+      for (int i = 0; i &lt; len; ++i)
+      {
+          //计算target与当前元素的差
+          int tmp = target - nums[i];
+          //判断差值是否在hash中
+          if (hash.count(tmp))
+          {
+              r.push_back(i);
+              r.push_back(hash[tmp]);
+              return r;
+          }
+          //若不存在,则将当前元素的下标与其值以key-value形式存入hash中
+          hash[nums[i]] = i;
+      }
+      return r;
+</code></pre><p>此段代码提交到<a href="https://leetcode.com/submissions/detail/113238727/" target="_blank" rel="external">leetcode</a>,其runtime为6ms,运行时间较之暴力求解法明显缩短了.</p>
+
 	</div>
 	<div class="meta split">
 		
