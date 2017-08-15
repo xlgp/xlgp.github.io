@@ -118,7 +118,7 @@
 <h4 id="识别"><a href="#识别" class="headerlink" title="识别"></a>识别</h4><p>验证码上的数字是非常规整的，首先存一份每一个数字的图像信息<br>切割后的图像分别与数字的图像信息做比较，返回比较的结果</p>
 <p><a href="https://github.com/xlgp/share/blob/master/lib/python/yzm.py" target="_blank" rel="external">源码github地址</a></p>
 <p>在程序中调用方法:<br>创建一个实例,参数为图像地址,调用getyzm(),返回数字信息.</p>
-<pre><code>YZM(path/to/imagename).getyzm()
+<pre><code>vcode = YZM(path/to/imagename).getyzm()
 </code></pre><p>python代码如下:</p>
 <pre><code>try:
     from PIL import Image
