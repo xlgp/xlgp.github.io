@@ -108,7 +108,8 @@
 Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
-</code></pre><h3 id="原文大意"><a href="#原文大意" class="headerlink" title="原文大意"></a>原文大意</h3><p>给定一个整数数组和一个目标数target,返回数组中两个相加等于target的元素的下标;假设给定的数据中恰巧只有一个解,并且同一个元素不可使用两次.</p>
+</code></pre><p>出处:<a href="https://leetcode.com/problems/two-sum/description/" target="_blank" rel="external">https://leetcode.com/problems/two-sum/description/</a></p>
+<h3 id="原文大意"><a href="#原文大意" class="headerlink" title="原文大意"></a>原文大意</h3><p>给定一个整数数组和一个目标数target,返回数组中两个相加等于target的元素的下标;假设给定的数据中恰巧只有一个解,并且同一个元素不可使用两次.</p>
 <p>例如:<br>给定一个数组nums = [2, 7, 11, 15],target = 9,<br>因为 2+7 = 9,而2, 7在数组中的下标分别为0,1,所以返回[0,1].</p>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><h4 id="1-暴力求解"><a href="#1-暴力求解" class="headerlink" title="1. 暴力求解"></a>1. 暴力求解</h4><p>看到这道题,就想到用两个for循环遍历两遍,判断两个值相加是否等于target,C++代码如下:</p>
 <pre><code>vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) {

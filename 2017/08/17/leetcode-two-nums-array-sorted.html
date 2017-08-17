@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Two Sum II - Input array is sorted | 心灵的孤僻</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow.min.css">
+
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="/" title="心灵的孤僻">
+	<img src="/logo.png" alt="心灵的孤僻"></a>
+
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
+
+
+<form class="js-search search-form search-form--modal" method="get" action="https://www.baidu.com/?s=" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="Enter Key..." type="search">
+		</div>
+	</div>
+</form>
+
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="/" target="">蓬门今开</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="/" target="">雁过留影</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="/aboutme.html" target="">博主自序</a>
+				</li>
+			
+				
+				<li class="current-menu-item">
+					<a href="/" target="">谈笑鸿儒</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+			<a href="/" title="心灵的孤僻"><img src="https://avatars2.githubusercontent.com/u/26807499?v=3&amp;u=dd3f5e9c7e47bbd63092da5d77eb1ed0176d9e20&amp;s=400" alt="心灵的孤僻"></a>
+		  	<div class="text">一个碌碌无为之少年</div>
+		  	<div class="text">一段平平无奇之岁月</div>
+		</div>
+	</section>
+	<div id="trianglify" class="fixed-banner"></div>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      Two Sum II - Input array is sorted
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.<br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.<br>You may assume that each input would have exactly one solution and you may not use the same element twice.<br>Input: numbers={2, 7, 11, 15}, target=9<br>Output: index1=1, index2=2</p>
+<p>出处:<a href="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/" target="_blank" rel="external">https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/</a></p>
+<h3 id="原文大意"><a href="#原文大意" class="headerlink" title="原文大意"></a>原文大意</h3><p>给定一个按升序排序的int类型数组和一个目标数target,在数组中查找两个数,使得这两个数之和等于target.<br>函数twoSum需要返回这两个数在数组中的下标index1,index2, 同时index1小于index2,注意:返回的下标不是以0为起始值.<br>假设每一组恰好只有一组解,并且数组中的元素不能被使用两次.</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>题中以说明数组已排序,则很容易想到二分查找.</p>
+<h3 id="解法一-Binary-Search"><a href="#解法一-Binary-Search" class="headerlink" title="解法一:Binary Search"></a>解法一:Binary Search</h3><pre><code>std::vector&lt;int&gt; twoSum(std::vector&lt;int&gt;&amp; nums, int target) {
+  int count = nums.size();
+  //遍历一遍数组
+  for (int i = 0; i &lt; count-1; ++i)
+  {
+    int diff = target - nums[i];
+    int istart = i+1, iend = count-1;
+    //使用二分法,在数组中查找diff
+    while(istart &lt;= iend){
+      //计算imid,
+      // 不建议使用:imid = (istart+iend)/2,可能会内存溢出
+      int imid = istart + (iend-istart)/2;
+      if (nums[imid] == diff)
+      {
+        return {i+1, imid+1};
+      }
+      if (nums[imid] &gt; diff)
+      {
+        iend = imid-1;
+      }
+      else{
+        istart = imid+1;
+      }
+    }
+  }
+}
+</code></pre><p>由于遍历了一遍数组,时间复杂度为O(N),同时内部运用二分查找,其时间复杂度为O(logN),则解法一的时间复杂度为  </p>
+<pre><code>O(N)*O(logN) = O(NlogN)
+</code></pre><p>此段代码提交到<a href="https://leetcode.com/submissions/detail/114155026/" target="_blank" rel="external">leetcode</a>,其runtime为9ms.</p>
+<h3 id="解法二-Two-Pointer"><a href="#解法二-Two-Pointer" class="headerlink" title="解法二:Two Pointer"></a>解法二:Two Pointer</h3><p>举一个例子:<br>int nums[] = {1,3,4,5,6,17, 18, 20, 30}<br>int target = 11<br>现在需要求两个下标lower, high使得nums[lower]+nums[high]=target,使用两个指针分别指向下标的最小值与最大值,则lower,high的初始值分别为0,nums-size()-1,如下图所示:<br>两个指针:lower = 0, high = nums.size()-1<br><img src="https://raw.githubusercontent.com/xlgp/static/master/20170817/1.png" alt="1"></p>
+<p>若nums[lower]+nums[high] &gt; target,则需要将high向左移；<br><img src="https://raw.githubusercontent.com/xlgp/static/master/20170817/2.png" alt="2"></p>
+<p>若nums[lower]+nums[high]&lt;target,则需要将lower向右移；<br><img src="https://raw.githubusercontent.com/xlgp/static/master/20170817/3.png" alt="3"></p>
+<p>若nums[lower]+nums[high]=target,则lower与high即为所求之值；<br><img src="https://raw.githubusercontent.com/xlgp/static/master/20170817/4.png" alt="4"></p>
+<pre><code>std::vector&lt;int&gt; twoSum(std::vector&lt;int&gt;&amp; numbers, int target){
+  int lower = 0, high = numbers.size()-1;
+  while(lower &lt; high){
+    //求target与numbers[lower]之差,
+    //nums[lower]+nums[high] 可能会溢出
+    int diff = target - numbers[lower];
+    if (numbers[high] == diff){
+      return {lower+1, high+1};
+    }
+    if(numbers[high] &gt; diff){
+      //右边的值比差值大
+      high--;
+    }
+    else if(numbers[high] &lt; diff){
+      //右边的值比差值小
+      lower++;
+    }
+  }
+  return {};
+}
+</code></pre><p>使用两个指针从数组的两边遍历,最好的情况是lower与high在数组的两端,最坏的情况是lower与high在中间某一位置相遇(不一定是中位数),在这种情况下,会遍历整个数组,则时间复杂度为O(n).<br>此段代码提交到<a href="https://leetcode.com/submissions/detail/114226501/" target="_blank" rel="external">leetcode</a>,其runtime为3ms.</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ol>
+<li>二分法时间复杂度<br>二分查找是在有序的数组中查找目标元素的方法,每次都拿中间的元素与目标元素比较,于是每次比较都可以减少一半的元素；<br>比较0次后,元素有n个；<br>比较1次后,元素有n/2个；<br>比较2次后,元素剩余n/4个,即n/2/2;<br>比较3次后,元素剩余n/8个,即n/2/2/2;<br>…<br>比较m次后,元素剩余n/2^m个;<br>最坏的情况下,元素只剩下1个;<pre><code>n/2^m = 1;
+m = log2(n)
+</code></pre>则二分查找的时间复杂度为O(logN)</li>
+</ol>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2017-08-17T02:55:31.000Z" itemprop="datePublished">2017-08-17</time>
+	</div>
+</article>
+
+<!--评论-->
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='https://avatars2.githubusercontent.com/u/26807499?v=3&amp;u=dd3f5e9c7e47bbd63092da5d77eb1ed0176d9e20&amp;s=400' alt='文文同学'>
+					<div class="media__body">
+						<h4>心灵的孤僻</h4>
+						<p class='site-description'>一个碌碌无为之少年，一段平平无奇之岁月</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/309750261/" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/xlgp" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
+</footer>
+<a href="javascript:;" class="top-btn"></a>
+
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/trianglify.min.js"></script>
+	<script src="/js/script.js"></script>
+	<script src="/js/gitment.browser.js"></script>
+	<!-- 
+
+	 -->
+	<!-- <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 			$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+
+				$(window).scroll(function(){
+					$(window).scrollTop() < 100 ? $('.top-btn').fadeOut():$('.top-btn').fadeIn();
+				});
+				$('.top-btn').on('click', function(){
+					$('html, body').animate({scrollTop:0}, 500, 'swing');
+				});
+		});
+	</script>
+	</body>
+</html>
